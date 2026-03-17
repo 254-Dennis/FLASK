@@ -1,10 +1,12 @@
 # import flask 
 from flask import *
 import pymysql
+from flask_cors import CORS
 import os
 
 # initialize the app
 app=Flask(__name__)
+CORS(app)
 app.config["UPLOAD_FOLDER"]="static/images"
 # define your route/endpoint  
 @app.route("/api/signup",methods=["POST"])
@@ -17,7 +19,7 @@ def signup() :
     phone=request.form["phone"]
 
     # establish connection to database 
-    connection= pymysql.connect(user="root",host="localhost",password="",database="kifarusokogarden")
+    connection= pymysql.connect(user="denniskifaru",host=" mysql-denniskifaru.alwaysdata.net",password="modcom2026",database="denniskifaru_sokogarden")
     # define your cursor 
     cursor=connection.cursor()
     # define sql to insert 
@@ -44,7 +46,7 @@ def signin():
     email=request.form["email"]
     password=request.form["password"]
     # connection to database 
-    connection=pymysql.connect(host="localhost",user="root",password="",database="kifarusokogarden")
+    connection=pymysql.connect(host=" mysql-denniskifaru.alwaysdata.net",user="denniskifaru",password="modcom2026",database="denniskifaru_sokogarden")
     # define your cursor 
     cursor=connection.cursor(pymysql.cursors.DictCursor)
     # define sql to select 
@@ -75,8 +77,8 @@ def addproduct():
     photopath=os.path.join(app.config["UPLOAD_FOLDER"],filename)
     # save the photo 
     product_photo.save(photopath)
-    # connection to database 
-    connection=pymysql.Connect(host="localhost",user="root",password="",database="kifarusokogarden")
+    # connection to database  mysql-de
+    connection=pymysql.Connect(host=" mysql-denniskifaru.alwaysdata.net",user="denniskifaru",password="modcom2026",database="denniskifaru_sokogarden")
     # define your cursor 
     cursor=connection.cursor()
     # define yoursql to insert 
@@ -96,7 +98,7 @@ def addproduct():
 # define your function 
 def getproducts():
     # connection to database 
-    connection=pymysql.connect(host="localhost",user="root",password="",database="kifarusokogarden")
+    connection=pymysql.connect(host=" mysql-denniskifaru.alwaysdata.net",user="denniskifaru",password="modcom2026",database="denniskifaru_sokogarden")
     # define your cursor 
     cursor=connection.cursor(pymysql.cursors.DictCursor)
     # define sql to select 
@@ -168,13 +170,3 @@ def mpesa_payment():
         return jsonify({"message": "Please Complete Payment in Your Phone and we will deliver in minutes"})
 
 
-
-
-
-
-
-
-
-
-# run the application 
-app.run(debug=True)
